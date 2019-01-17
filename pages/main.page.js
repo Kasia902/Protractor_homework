@@ -10,11 +10,15 @@ class MainPage extends BasePage {
 
     //PO Actions
     async open() {
-        await browser.get('https://hotline.ua/');
+        allure.createStep("Open main Hotline page", async() => {
+            await browser.get('https://hotline.ua/');
+        })();        
     };
 
     async navigateToLogin () {
-        await this.getLoginButtonElement().click();
+        allure.createStep("Click Login link", async() => {
+            await this.getLoginButtonElement().click();
+        })();        
     };
 
     //PO Getters

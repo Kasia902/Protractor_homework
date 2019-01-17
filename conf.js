@@ -1,3 +1,5 @@
+let AllureReporter = require("jasmine-allure-reporter");
+
 exports.config = {
     SELENIUM_PROMISE_MANAGER: false,
     framework: 'jasmine',
@@ -10,6 +12,6 @@ exports.config = {
         }
     },
     onPrepare: async () => {
-        
+        jasmine.getEnv().addReporter(new AllureReporter());
     }
 }
