@@ -10,8 +10,8 @@ class LoginPage extends BasePage {
     }
 
     //PO Actions
-    async enterEmail() {
-        await this.getEmailElement().sendKeys('garicozuf@proto2mail.com');
+    async enterEmail(email) {
+        await this.getEmailElement().sendKeys(email);
     };
 
     async enterPassword() {
@@ -21,6 +21,7 @@ class LoginPage extends BasePage {
     async submitLoginForm () {
         await this.getSubmitButtonElement().click();
     };
+    
     //PO Getters
     getSubmitButtonElement() {
         return element(submitButtonLocator);

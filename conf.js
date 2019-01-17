@@ -8,5 +8,8 @@ exports.config = {
         chromeOptions: {
             args: ["window-size=1920,1080"]
         }
+    },
+    onPrepare: async () => {
+        
     }
 }
