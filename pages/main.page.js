@@ -4,26 +4,35 @@ let loginButtonLocator = by.xpath('//*[@class="item-login"]');
 let userIconLocator = by.xpath('//*[@class="name ellipsis"]');
 
 class MainPage extends BasePage {
-    constructor(){
-        super();
+    // PO Actions
+    open() {
+        allure.createStep("Open main Hotline page", async () => {
+            await browser.get('https://hotline.ua/');
+            let screenshotFile = await browser.takeScreenshot();
+            await allure.createAttachment('Screenshot', () => {
+                return new Buffer(screenshotFile, 'base64')
+            }, 'image/png')();
+        })();
     }
 
-    //PO Actions
-    async open() {
-        await browser.get('https://hotline.ua/');
-    };
+    navigateToLogin() {
+        allure.createStep("Click Login link", async () => {
+            await this.getLoginButtonElement().click();
+            let screenshotFile = await browser.takeScreenshot();
+            await allure.createAttachment('Screenshot', () => {
+                return new Buffer(screenshotFile, 'base64')
+            }, 'image/png')();
+        })();
+    }
+    // PO Getters
 
-    async navigateToLogin () {
-        await this.getLoginButtonElement().click();
-    };
-
-    //PO Getters
     getLoginButtonElement() {
-        return element (loginButtonLocator);
-    };
+        return element(loginButtonLocator);
+    }
+
     getUserIconElement() {
-        return element (userIconLocator);
-    };
+        return element(userIconLocator);
+    }
 }
 
 module.exports = new MainPage();

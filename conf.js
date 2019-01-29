@@ -1,3 +1,5 @@
+let AllureReporter = require("jasmine-allure-reporter");
+
 exports.config = {
     SELENIUM_PROMISE_MANAGER: false,
     framework: 'jasmine',
@@ -8,5 +10,8 @@ exports.config = {
         chromeOptions: {
             args: ["window-size=1920,1080"]
         }
+    },
+    onPrepare: async () => {
+        jasmine.getEnv().addReporter(new AllureReporter());
     }
 }
