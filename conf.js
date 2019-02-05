@@ -22,14 +22,14 @@ exports.config = {
         await browser.restart();
         browser.waitForAngularEnabled(false);
         await browser.manage().setTimeouts({implicit: browser.params.implicitWait});
-
         jasmine.getEnv().addReporter(new AllureReporter());
-
-        /*
-        let screenshotFile = await browser.takeScreenshot();
-        await allure.createAttachment('Screenshot', () => {
-            return Buffer.from(screenshotFile, 'base64')
-        }, 'image/png')();
-        */
+        jasmine.getEnv().afterEach(function(done){
+            browser.takeScreenshot().then(function (png) {
+              allure.createAttachment('Screenshot',  () => {
+                return Buffer.from(png, 'base64')
+              }, 'image/png')();
+              done();
+            })
+          });
     }
 }
