@@ -1,4 +1,5 @@
 let BasePage = require("./base.page");
+let WebButton = require("../elements/button.element");
 
 let EC = protractor.ExpectedConditions;
 let loginButtonLocator = by.xpath('//*[@class="item-login"]');
@@ -25,7 +26,7 @@ class MainPage extends BasePage {
     // PO Getters
 
     getLoginButtonElement() {
-        return element(loginButtonLocator);
+        return new WebButton(element(loginButtonLocator), "Navigate Login Button", this);
     }
 
     getUserIconElement() {
