@@ -1,4 +1,5 @@
 let BasePage = require("./base.page");
+let WebButton = require("../elements/button.element");
 
 let EC = protractor.ExpectedConditions;
 let loginButtonLocator = by.xpath('//*[@class="item-login"]');
@@ -8,7 +9,7 @@ class MainPage extends BasePage {
     // PO Actions
 
     async waitForPageToBeAvailable() {
-        await browser.wait(EC.visibilityOf(this.getUserIconElement()), browser.params.explicitWait);
+        await browser.wait(EC.visibilityOf(this.getUserIconElement().getProtractorElement()), browser.params.explicitWait);
     }
 
     async open() {
@@ -25,11 +26,11 @@ class MainPage extends BasePage {
     // PO Getters
 
     getLoginButtonElement() {
-        return element(loginButtonLocator);
+        return new WebButton(element(loginButtonLocator), "Navigate Login Button", this);
     }
 
     getUserIconElement() {
-        return element(userIconLocator);
+        return new WebButton(element(userIconLocator), "User Icon Button", this);
     }
 }
 

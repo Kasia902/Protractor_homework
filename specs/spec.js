@@ -13,6 +13,6 @@ describe('Hotline - Login:', () => {
         await LoginPage.waitForPageToBeAvailable();
         await LoginPage.submitForm(`garicozuf@proto2mail.com`, `123456Aa`);
         await MainPage.waitForPageToBeAvailable();
-        expect(await MainPage.getUserIconElement().isDisplayed()).toBeTruthy();
+        expect(await MainPage.getUserIconElement().isDisplayed()).toBe(true);
     });
 });

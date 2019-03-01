@@ -1,4 +1,6 @@
 let BasePage = require("./base.page");
+let WebInput = require("../elements/webinput.element.js");
+let WebButton = require("../elements/button.element");
 
 let EC = protractor.ExpectedConditions;
 let emailLocator = by.xpath('//*[@type="email"]');
@@ -9,29 +11,29 @@ class LoginPage extends BasePage {
     // PO Actions
 
     async waitForPageToBeAvailable() {
-        await browser.wait(EC.visibilityOf(this.getEmailElement()), browser.params.explicitWait);
-        await browser.wait(EC.visibilityOf(this.getSubmitButtonElement()), browser.params.explicitWait);
+        await browser.wait(EC.visibilityOf(this.getEmailElement().getProtractorElement()), browser.params.explicitWait);
+        await browser.wait(EC.visibilityOf(this.getSubmitButtonElement().getProtractorElement()), browser.params.explicitWait);
     }
 
     async submitForm(email, password) {
         await allure.createStep("Fill and submit form", async () => {
-            await this.getEmailElement().sendKeys(email);
-            await this.getPasswordElement().sendKeys(password);
-            await this.getSubmitButtonElement().click();
+            await (this.getEmailElement().getProtractorElement()).sendKeys(email);
+            await (this.getPasswordElement().getProtractorElement()).sendKeys(password);
+            await (this.getSubmitButtonElement().getProtractorElement()).click();
         })();
     }
 
     // PO Getters
     getSubmitButtonElement() {
-        return element(submitButtonLocator);
+        return new WebButton(element(submitButtonLocator), "Submit Form Button", this);
     }
 
     getEmailElement() {
-        return element(emailLocator);
+        return new WebInput(element(emailLocator), "Email Input Field", this);
     }
 
     getPasswordElement() {
-        return element(passwordLocator);
+        return new WebInput(element(passwordLocator), "Password Input Field", this);
     }
 }
 
