@@ -30,6 +30,6 @@ exports.config = {
               }, 'image/png')();
               done();
             })
-          });
+        });
     }
 }

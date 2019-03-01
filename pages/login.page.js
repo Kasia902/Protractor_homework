@@ -7,6 +7,7 @@ let emailLocator = by.xpath('//*[@type="email"]');
 let passwordLocator = by.xpath('//*[@type="password"]');
 let submitButtonLocator = by.xpath('//*[@type="submit"]');
 
+
 class LoginPage extends BasePage {
     // PO Actions
 
