@@ -5,7 +5,7 @@ let RegisterPage = require("../pages/register.page");
 let ConfirmPage = require("../pages/confirm.page");
 
 
-describe('Hotline - Register Successfully:', () => {
+describe('01. Hotline - Register Successfully:', () => {
     beforeAll(async () => {
         // empty
     });
