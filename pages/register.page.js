@@ -5,11 +5,11 @@ let WebButton = require("../elements/button.element");
 let EC = protractor.ExpectedConditions;
 let emailLocator = by.xpath('//*[@type="email"]');
 let passwordLocator = by.xpath('//*[@type="password"]');
+let loginLocator = by.xpath('//*[@name="login"]');
 let submitButtonLocator = by.xpath('//*[@type="submit"]');
-let registerLinkLocator = by.xpath('/html/body/div[1]/div[1]/div/div[1]/div[3]/p/a');
 
 
-class LoginPage extends BasePage {
+class RegisterPage extends BasePage {
     // PO Actions
 
     async waitForPageToBeAvailable() {
@@ -17,36 +17,32 @@ class LoginPage extends BasePage {
         await browser.wait(EC.visibilityOf(this.getSubmitButtonElement().getProtractorElement()), browser.params.explicitWait);
     }
 
-    async submitForm(email, password) {
-        await allure.createStep("Fill and submit form", async () => {
+    async submitRegisterForm(email, login, password) {
+        await allure.createStep("Fill and submit register form", async () => {
             await (this.getEmailElement().getProtractorElement()).sendKeys(email);
+            await (this.getLoginElement().getProtractorElement()).sendKeys(login);
             await (this.getPasswordElement().getProtractorElement()).sendKeys(password);
             await (this.getSubmitButtonElement().getProtractorElement()).click();
         })();
     }
 
-    async navigateToRegister() {
-        await allure.createStep("Click Register link", async () => {
-            await this.getRegisterLinkElement().click();
-        })();
-    }
 
     // PO Getters
     getSubmitButtonElement() {
-        return new WebButton(element(submitButtonLocator), "Submit Form Button", this);
+        return new WebButton(element(submitButtonLocator), "Submit Register Form Button", this);
     }
 
     getEmailElement() {
         return new WebInput(element(emailLocator), "Email Input Field", this);
     }
 
+    getLoginElement() {
+        return new WebInput(element(loginLocator), "Login(Nickname) Input Field", this);
+    }
+
     getPasswordElement() {
         return new WebInput(element(passwordLocator), "Password Input Field", this);
     }
-
-    getRegisterLinkElement() {
-        return new WebButton(element(registerLinkLocator), "Register Link", this);
-    }
 }
 
-module.exports = new LoginPage();
+module.exports = new RegisterPage();
