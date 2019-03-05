@@ -25,6 +25,13 @@ class BaseElement {
         console.log(`Enter value to ${this.constructor.name} "${this.elementName}" on "${this.pageObject.constructor.name}"`);
         await this.protractorElement.sendKeys();
     }
+
+    async getText() {
+        // console.log(`Enter value to ${this.constructor.name} "${this.elementName}" on "${this.pageObject.constructor.name}"`);
+        let text = await this.protractorElement.getText();
+        // console.log(text);
+        return (text);
+    }
 }
 
 module.exports = BaseElement;
