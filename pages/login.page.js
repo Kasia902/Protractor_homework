@@ -6,7 +6,7 @@ let EC = protractor.ExpectedConditions;
 let emailLocator = by.xpath('//*[@type="email"]');
 let passwordLocator = by.xpath('//*[@type="password"]');
 let submitButtonLocator = by.xpath('//*[@type="submit"]');
-let registerLinkLocator = by.xpath('/html/body/div[1]/div[1]/div/div[1]/div[3]/p/a');
+let registerLinkLocator = by.xpath('//a[.="Зарегистрироваться"]');
 
 
 class LoginPage extends BasePage {
