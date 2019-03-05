@@ -1,11 +1,14 @@
 let BasePage = require("./base.page");
 let WebInput = require("../elements/webinput.element.js");
 let WebButton = require("../elements/button.element");
+let TextContainer = require("../elements/textContainer.element");
 
 let EC = protractor.ExpectedConditions;
 let emailLocator = by.xpath('//*[@type="email"]');
 let passwordLocator = by.xpath('//*[@type="password"]');
 let submitButtonLocator = by.xpath('//*[@type="submit"]');
+let errorContainerLocator = by.xpath('//*[@class="error-field"]');
+let errorMessageLocator = by.xpath('//*[@class="item-error"]');
 
 
 class LoginPage extends BasePage {
@@ -14,6 +17,11 @@ class LoginPage extends BasePage {
     async waitForPageToBeAvailable() {
         await browser.wait(EC.visibilityOf(this.getEmailElement().getProtractorElement()), browser.params.explicitWait);
         await browser.wait(EC.visibilityOf(this.getSubmitButtonElement().getProtractorElement()), browser.params.explicitWait);
+    }
+
+    async clearForm() {
+        await (this.getEmailElement().getProtractorElement()).clear();
+        await (this.getPasswordElement().getProtractorElement()).clear();
     }
 
     async submitForm(email, password) {
@@ -35,6 +43,14 @@ class LoginPage extends BasePage {
 
     getPasswordElement() {
         return new WebInput(element(passwordLocator), "Password Input Field", this);
+    }
+
+    getErrorContainerElement() {
+        return new TextContainer(element(errorContainerLocator), "Error Message", this);
+    }
+
+    getErrorMessageElement() {
+        return new TextContainer(element(errorMessageLocator), "Error Message", this);
     }
 }
 
