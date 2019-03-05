@@ -10,7 +10,7 @@ let loginLocator = by.xpath('//*[@name="login"]');
 let submitButtonLocator = by.xpath('//*[@type="submit"]');
 let errorContainerLocator = by.xpath('//*[@class="error-field"]');
 let errorMessageLocator = by.xpath('//*[@class="item-error"]');
-// let errorEmptyFieldLocator = by.xpath('//*[@id="reg-form"]/div/div/div[1]/div/div');
+
 
 class RegisterPage extends BasePage {
     // PO Actions
@@ -34,6 +34,7 @@ class RegisterPage extends BasePage {
             await (this.getSubmitButtonElement().getProtractorElement()).click();
         })();
     }
+
 
     // PO Getters
     getSubmitButtonElement() {
@@ -59,10 +60,7 @@ class RegisterPage extends BasePage {
     getErrorMessageElement() {
         return new TextContainer(element(errorMessageLocator), "Error Message", this);
     }
-
-    getErrorEmptyFieldElement() {
-        return new TextContainer(element(errorEmptyFieldLocator), "Error Message", this);
-    }
 }
+
 
 module.exports = new RegisterPage();

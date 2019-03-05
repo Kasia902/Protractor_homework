@@ -11,6 +11,7 @@ let submitButtonLocator = by.xpath('//*[@type="submit"]');
 let errorContainerLocator = by.xpath('//*[@class="error-field"]');
 let errorMessageLocator = by.xpath('//*[@class="item-error"]');
 
+
 class LoginPage extends BasePage {
     // PO Actions
 
@@ -51,16 +52,16 @@ class LoginPage extends BasePage {
         return new WebInput(element(passwordLocator), "Password Input Field", this);
     }
 
+    getRegisterLinkElement() {
+        return new WebButton(element(registerLinkLocator), "Register Link", this);
+    }
+
     getErrorContainerElement() {
         return new TextContainer(element(errorContainerLocator), "Error Message", this);
     }
 
     getErrorMessageElement() {
         return new TextContainer(element(errorMessageLocator), "Error Message", this);
-    }
-
-    getRegisterLinkElement() {
-        return new WebButton(element(registerLinkLocator), "Register Link", this);
     }
 }
 
