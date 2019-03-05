@@ -7,6 +7,7 @@ let EC = protractor.ExpectedConditions;
 let emailLocator = by.xpath('//*[@type="email"]');
 let passwordLocator = by.xpath('//*[@type="password"]');
 let submitButtonLocator = by.xpath('//*[@type="submit"]');
+let registerLinkLocator = by.xpath('//a[@href="/register/"]');
 let errorContainerLocator = by.xpath('//*[@class="error-field"]');
 let errorMessageLocator = by.xpath('//*[@class="item-error"]');
 
@@ -32,6 +33,12 @@ class LoginPage extends BasePage {
         })();
     }
 
+    async navigateToRegister() {
+        await allure.createStep("Click Register link", async () => {
+            await this.getRegisterLinkElement().click();
+        })();
+    }
+
     // PO Getters
     getSubmitButtonElement() {
         return new WebButton(element(submitButtonLocator), "Submit Form Button", this);
@@ -43,6 +50,10 @@ class LoginPage extends BasePage {
 
     getPasswordElement() {
         return new WebInput(element(passwordLocator), "Password Input Field", this);
+    }
+
+    getRegisterLinkElement() {
+        return new WebButton(element(registerLinkLocator), "Register Link", this);
     }
 
     getErrorContainerElement() {
