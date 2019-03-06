@@ -27,9 +27,8 @@ class BaseElement {
     }
 
     async getText() {
-        // console.log(`Enter value to ${this.constructor.name} "${this.elementName}" on "${this.pageObject.constructor.name}"`);
         let text = await this.protractorElement.getText();
-        // console.log(text);
+        console.log(text);
         return (text);
     }
 }
