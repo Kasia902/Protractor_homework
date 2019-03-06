@@ -4,7 +4,7 @@ let WebButton = require("../elements/button.element");
 let TextContainer = require("../elements/textContainer.element");
 
 let EC = protractor.ExpectedConditions;
-let registerLinkLocator = by.xpath('/html/body/div[1]/div[1]/div/div[1]/div[3]/p/a');
+let registerLinkLocator = by.xpath('//a[@href="/register/"]');
 let emailLocator = by.xpath('//*[@type="email"]');
 let passwordLocator = by.xpath('//*[@type="password"]');
 let submitButtonLocator = by.xpath('//*[@type="submit"]');
