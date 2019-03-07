@@ -19,9 +19,11 @@ exports.config = {
         defaultTimeoutInterval: 60000
     },
     onPrepare: async () => {
-        await browser.restart();
-        browser.waitForAngularEnabled(false);
-        await browser.manage().setTimeouts({implicit: browser.params.implicitWait});
+        await jasmine.getEnv().beforeEach(async function(){
+            await browser.restart();
+            browser.waitForAngularEnabled(false);
+            await browser.manage().setTimeouts({ implicit: browser.params.implicitWait });
+            });
         jasmine.getEnv().addReporter(new AllureReporter());
         jasmine.getEnv().afterEach(function(done){
             browser.takeScreenshot().then(function (png) {
