@@ -31,8 +31,7 @@ class MainPage extends BasePage {
 
     async searchItem(searchText) {
         await allure.createStep("Search for item", async () => {
-            await this.geSearchFieldElement().click();
-            await (this.geSearchFieldElement().getProtractorElement()).clear();
+            // await this.geSearchFieldElement().clear();
             await this.geSearchFieldElement().sendKeys(searchText);
             await this.getSubmitSearchButtonElement().click();
         })();
@@ -45,7 +44,7 @@ class MainPage extends BasePage {
     }
 
     async clearForm() {
-        await (this.geSearchFieldElement().getProtractorElement()).clear();
+        await this.geSearchFieldElement().clear();
     }
 
 

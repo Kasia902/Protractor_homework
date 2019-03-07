@@ -18,9 +18,9 @@ class LoginPage extends BasePage {
 
     async submitForm(email, password) {
         await allure.createStep("Fill and submit form", async () => {
-            await (this.getEmailElement().getProtractorElement()).sendKeys(email);
-            await (this.getPasswordElement().getProtractorElement()).sendKeys(password);
-            await (this.getSubmitButtonElement().getProtractorElement()).click();
+            await this.getEmailElement().sendKeys(email);
+            await this.getPasswordElement().sendKeys(password);
+            await this.getSubmitButtonElement().click();
         })();
     }
 
