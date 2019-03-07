@@ -4,15 +4,15 @@ let WebButton = require("../elements/button.element");
 let TextContainer = require("../elements/textContainer.element");
 
 let EC = protractor.ExpectedConditions;
-let registerLinkLocator = by.xpath('//a[@href="/register/"]');
 let emailLocator = by.xpath('//*[@type="email"]');
 let passwordLocator = by.xpath('//*[@type="password"]');
+let loginLocator = by.xpath('//*[@name="login"]');
 let submitButtonLocator = by.xpath('//*[@type="submit"]');
 let errorContainerLocator = by.xpath('//*[@class="error-field"]');
 let errorMessageLocator = by.xpath('//*[@class="item-error"]');
 
 
-class LoginPage extends BasePage {
+class RegisterPage extends BasePage {
     // PO Actions
 
     async waitForPageToBeAvailable() {
@@ -23,43 +23,34 @@ class LoginPage extends BasePage {
     async clearForm() {
         await (this.getEmailElement().getProtractorElement()).clear();
         await (this.getPasswordElement().getProtractorElement()).clear();
+        await (this.getLoginElement().getProtractorElement()).clear();
     }
 
-    async submitForm(email, password) {
-        await allure.createStep("Fill and submit form", async () => {
-            await this.getEmailElement().sendKeys(email);
-            await this.getPasswordElement().sendKeys(password);
-            await this.getSubmitButtonElement().click();
+    async submitRegisterForm(email, login, password) {
+        await allure.createStep("Fill and submit register form", async () => {
+            await (this.getEmailElement().getProtractorElement()).sendKeys(email);
+            await (this.getLoginElement().getProtractorElement()).sendKeys(login);
+            await (this.getPasswordElement().getProtractorElement()).sendKeys(password);
+            await (this.getSubmitButtonElement().getProtractorElement()).click();
         })();
     }
 
-    async navigateToRegister() {
-        await allure.createStep("Click Register link", async () => {
-            await this.getRegisterLinkElement().click();
-        })();
-    }
-
-    async navigateToRegister() {
-        await allure.createStep("Click Register link", async () => {
-            await this.getRegisterLinkElement().click();
-        })();
-    }
 
     // PO Getters
     getSubmitButtonElement() {
-        return new WebButton(element(submitButtonLocator), "Submit Form Button", this);
+        return new WebButton(element(submitButtonLocator), "Submit Register Form Button", this);
     }
 
     getEmailElement() {
         return new WebInput(element(emailLocator), "Email Input Field", this);
     }
 
-    getPasswordElement() {
-        return new WebInput(element(passwordLocator), "Password Input Field", this);
+    getLoginElement() {
+        return new WebInput(element(loginLocator), "Login(Nickname) Input Field", this);
     }
 
-    getRegisterLinkElement() {
-        return new WebButton(element(registerLinkLocator), "Register Link", this);
+    getPasswordElement() {
+        return new WebInput(element(passwordLocator), "Password Input Field", this);
     }
 
     getErrorContainerElement() {
@@ -71,4 +62,5 @@ class LoginPage extends BasePage {
     }
 }
 
-module.exports = new LoginPage();
+
+module.exports = new RegisterPage();
