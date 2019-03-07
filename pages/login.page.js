@@ -24,6 +24,12 @@ class LoginPage extends BasePage {
         })();
     }
 
+    async navigateToRegister() {
+        await allure.createStep("Click Register link", async () => {
+            await this.getRegisterLinkElement().click();
+        })();
+    }
+
     // PO Getters
     getSubmitButtonElement() {
         return new WebButton(element(submitButtonLocator), "Submit Form Button", this);
