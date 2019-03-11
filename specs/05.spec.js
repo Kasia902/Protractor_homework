@@ -1,5 +1,5 @@
 let MainPage = require("../pages/main.page");
-let SearchPage = require("../pages/search.page");
+let SearchPage = require("../pages/search.page.js");
 
 
 describe('Hotline - Search:', () => {
