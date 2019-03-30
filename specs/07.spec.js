@@ -36,10 +36,8 @@ describe('Delete from cart:', () => {
         await browser.sleep(1000);
         await MainPage.openCart(); // open cart
         await browser.sleep(10000);
-        // expect to check 3 items in cart
         await MainPage.waitForCartToBeAvailable();
         await MainPage.deleteFromCart(); // delete first item in cart
-        // expect to check 2 items left in cart
         await MainPage.waitForCartToBeAvailable();
         await MainPage.deleteLastItemFromCart(); // delete last item from cart
         await MainPage.open();
