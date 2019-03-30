@@ -20,6 +20,18 @@ class BaseElement {
             return true;
         }
     }
+
+    async hoverElement() {
+        console.log(`Hover ${this.constructor.name} "${this.elementName}" on "${this.pageObject.constructor.name}"`);
+        await browser.actions().mouseMove(this.protractorElement).perform();
+    }
+
+    async isPresent() {
+        if (await this.protractorElement.isPresent()) {
+            console.log(`${this.constructor.name} "${this.elementName}" is present on "${this.pageObject.constructor.name}"`);
+            return true;
+        }
+    }
 }
 
 module.exports = BaseElement;
