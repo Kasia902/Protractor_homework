@@ -13,10 +13,10 @@ let dachasadLocator = by.xpath('//*[@class="level-1 dacha_sad"]');
 let baseynyLocator = by.xpath('//*[@data-menu-id="2952"]');
 let nasosyLocator = by.xpath('//a[@href="/dacha_sad/nasosy-vodosnabzheniya/46036/"]');
 let cartLocator = by.xpath('//*[@class="box-in"]');
-let deleteFromCartLocator = by.xpath('//*[@class="row-indent"]/i');
+let deleteFromCartLocator = by.xpath('//*[@class="viewbox-striped border-t"]/ul/li/i');
 let lastDeleteFromCartLocator = by.xpath('//*[@class="row-indent"][last()]/i');
 let ItemsCountLocator = by.xpath('//*[@class="box-in"]/span[contains(text(),"1")]');
-let goToCartButtonLocator = by.xpath('//*[@href="/cart/"]');
+let goToCartButtonLocator = by.xpath('//*[@class="li-scroll clearfix"]');
 
 class MainPage extends BasePage {
     // PO Actions
@@ -26,11 +26,11 @@ class MainPage extends BasePage {
     }
 
     async waitForCartToBeAvailable() {
-        await browser.wait(EC.visibilityOf(this.getItemCountElement()), browser.params.explicitWait);
+        await browser.wait(EC.visibilityOf(this.getCartElement().getProtractorElement()), 5000);
     }
 
     async waitForDeleteToBeAvailable() {
-        await browser.wait(EC.visibilityOf(this.getGoToCartElement().getProtractorElement()), browser.params.explicitWait);
+        await browser.wait(EC.visibilityOf(this.getDeleteFromCartIconElement().getProtractorElement()), 5000);
     }
 
     async open() {
@@ -47,7 +47,6 @@ class MainPage extends BasePage {
 
     async searchItem(searchText) {
         await allure.createStep("Search for item", async () => {
-            // await this.geSearchFieldElement().clear();
             await this.geSearchFieldElement().sendKeys(searchText);
             await this.getSubmitSearchButtonElement().click();
         })();
@@ -73,8 +72,8 @@ class MainPage extends BasePage {
 
     async openCart() {
         await allure.createStep("OpenCart", async () => {
-            console.log('open cart');
             await this.getCartElement().click();
+            console.log('open cart');
         })();
     }
 
