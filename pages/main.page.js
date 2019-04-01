@@ -8,6 +8,7 @@ let userIconLocator = by.xpath('//*[@class="name ellipsis"]');
 let searchFieldLocator = by.xpath('//*[@id="searchbox"]');
 let submitSearchButtonLocator = by.xpath('//*[@id="doSearch"]');
 let cityBannerCloseLocator = by.xpath('//*[@class="close"]');
+let feedbackLocator = by.xpath('//a[@href="/feedback/"]');
 
 
 class MainPage extends BasePage {
@@ -20,6 +21,17 @@ class MainPage extends BasePage {
     async open() {
         await allure.createStep("Open main Hotline page", async () => {
             await browser.get('https://hotline.ua/');
+        })();
+    }
+
+
+    async openFeedback() {
+        await allure.createStep("Open Feedback Page", async () => {
+            await this.getFeedbackLinkLocator().click();
+            await browser.getAllWindowHandles().then(function (handles) {
+                browser.sleep(5000);
+                browser.switchTo().window(handles[1]);
+            });
         })();
     }
 
@@ -68,6 +80,10 @@ class MainPage extends BasePage {
 
     getCityBannerCloseButtonElement() {
         return new WebButton(element(cityBannerCloseLocator), "Navigate Login Button", this);
+    }
+
+    getFeedbackLinkLocator() {
+        return new WebButton(element(feedbackLocator), "Navigate Feedback Form Link", this);
     }
 }
 
