@@ -1,5 +1,4 @@
 let BasePage = require("./base.page");
-let WebInput = require("../elements/webinput.element.js");
 let TextContainer = require("../elements/textContainer.element.js");
 
 let EC = protractor.ExpectedConditions;
