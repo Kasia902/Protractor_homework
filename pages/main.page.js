@@ -12,10 +12,11 @@ let cityBannerCloseLocator = by.xpath('//*[@class="close"]');
 let dachasadLocator = by.xpath('//*[@class="level-1 dacha_sad"]');
 let baseynyLocator = by.xpath('//*[@data-menu-id="2952"]');
 let nasosyLocator = by.xpath('//a[@href="/dacha_sad/nasosy-vodosnabzheniya/46036/"]');
-let cartLocator = by.xpath('//*[@class="item-cart"]');
+let cartLocator = by.xpath('//*[@class="box-in"]');
 let deleteFromCartLocator = by.xpath('//*[@class="row-indent"]/i');
 let lastDeleteFromCartLocator = by.xpath('//*[@class="row-indent"][last()]/i');
 let ItemsCountLocator = by.xpath('//*[@class="box-in"]/span[contains(text(),"1")]');
+let goToCartButtonLocator = by.xpath('//*[@href="/cart/"]');
 
 class MainPage extends BasePage {
     // PO Actions
@@ -25,7 +26,11 @@ class MainPage extends BasePage {
     }
 
     async waitForCartToBeAvailable() {
-        await browser.wait(EC.visibilityOf(this.getDeleteFromCartIconElement().getProtractorElement()), browser.params.explicitWait);
+        await browser.wait(EC.visibilityOf(this.getItemCountElement()), browser.params.explicitWait);
+    }
+
+    async waitForDeleteToBeAvailable() {
+        await browser.wait(EC.visibilityOf(this.getGoToCartElement().getProtractorElement()), browser.params.explicitWait);
     }
 
     async open() {
@@ -68,9 +73,8 @@ class MainPage extends BasePage {
 
     async openCart() {
         await allure.createStep("OpenCart", async () => {
-            // browser.switchTo().window();
+            console.log('open cart');
             await this.getCartElement().click();
-            // browser.switchTo().window(this.getCartElement());
         })();
     }
 
@@ -141,6 +145,10 @@ class MainPage extends BasePage {
 
     getItemCountElement() {
         return new TextContainer(element(ItemsCountLocator), "Items Count in Cart", this);
+    }
+
+    getGoToCartElement() {
+        return new TextContainer(element(goToCartButtonLocator), "Items Count in Cart", this);
     }
 }
 
