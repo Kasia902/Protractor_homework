@@ -18,6 +18,7 @@ let lastDeleteFromCartLocator = by.xpath('//*[@class="row-indent"][last()]/i');
 let ItemsCountLocator = by.xpath('//*[@class="box-in"]/span[contains(text(),"1")]');
 let goToCartButtonLocator = by.xpath('//*[@class="li-scroll clearfix"]');
 
+
 class MainPage extends BasePage {
     // PO Actions
 

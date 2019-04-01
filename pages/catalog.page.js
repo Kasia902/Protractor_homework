@@ -9,6 +9,7 @@ let add2ndItemToBasketLocator = by.xpath('//*[@id="catalog-products"]/div[2]/ul/
 let add1stItemToBasketLocator = by.xpath('//*[@id="catalog-products"]/div[2]/ul/li[1]/div[2]');
 
 
+
 class CatalogPage extends BasePage {
     // PO Actions
 
@@ -24,7 +25,8 @@ class CatalogPage extends BasePage {
         })();
     }
 
-    async Buy2ndItemOnHotline() {
+
+  async Buy2ndItemOnHotline() {
         await allure.createStep("Add item to Basket", async () => {
             await (this.getBuyOnHotlineCheckboxElement().check());
             await (this.getAdd2ndItemToCartElement().click());
@@ -37,6 +39,7 @@ class CatalogPage extends BasePage {
             await (this.getAdd1stItemToCartElement().click());
         })();
     }
+
 
     // PO Getters
     getBuyOnHotlineCheckboxElement() {
