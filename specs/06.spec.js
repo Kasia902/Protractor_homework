@@ -20,7 +20,7 @@ describe('Buy Item:', () => {
         // await MainPage.closeCityBanner();
         await MainPage.openNasosyCatalog();
         await CatalogPage.waitForPageToBeAvailable();
-        await CatalogPage.BuyItemOnHotline();
+        await CatalogPage.buy3rdItemOnHotline();
         await ProductPage.waitForPageToBeAvailable();
         // browser.sleep(5000);
         await ProductPage.BuyItemNow();

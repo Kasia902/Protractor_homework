@@ -10,7 +10,7 @@ let EC = protractor.ExpectedConditions;
 let sendMessageLocator = by.xpath('//*[@class="viewbox"]');
 let chooseFileButtonLocator = by.xpath('//*[@type="file"]');
 let choose2ndFileButtonLocator = by.xpath('//*[@class="cell-7 cell-sm"]/div[2]/input');
-let errorContainerLocator = by.xpath('(//*[@class="m_b-sm"])[2]');
+let errorContainerLocator = by.xpath('//*[@class="cell-7 cell-sm"]/div[2]/div[2]/div');
 
 class FeedbackPage extends BasePage {
     // PO Actions

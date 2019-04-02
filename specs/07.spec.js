@@ -27,7 +27,7 @@ describe('Delete from cart:', () => {
         await browser.navigate().back();
         await browser.navigate().back();
         await CatalogPage.waitForPageToBeAvailable();
-        await CatalogPage.BuyItemOnHotline(); // add 3rd item to cart
+        await CatalogPage.buy3rdItemOnHotline(); // add 3rd item to cart
         await ProductPage.waitForPageToBeAvailable();
         await ProductPage.BuyItemNow();
         await CartPage.waitForPageToBeAvailable();

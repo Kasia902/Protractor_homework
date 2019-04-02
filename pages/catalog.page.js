@@ -21,7 +21,7 @@ class CatalogPage extends BasePage {
 
     async waitForPageToBeAvailable() {
         await browser.wait(EC.visibilityOf(this.getBuyOnHotlineCheckboxElement().getProtractorElement()), browser.params.explicitWait);
-        await browser.wait(EC.visibilityOf(this.getAdd3rdItemToCartElement().getProtractorElement()), browser.params.explicitWait);
+        // await browser.wait(EC.visibilityOf(this.getAdd3rdItemToCartElement().getProtractorElement()), browser.params.explicitWait);
     }
 
     async waitForItemToBeAvailable() {
@@ -32,7 +32,7 @@ class CatalogPage extends BasePage {
         await browser.wait(EC.visibilityOf(this.getShlyamburElement().getProtractorElement()), browser.params.explicitWait);
     }
 
-    async BuyItemOnHotline() {
+    async buy3rdItemOnHotline() {
         await allure.createStep("Add item to Basket", async () => {
             await (this.getBuyOnHotlineCheckboxElement().check());
             await (this.getAdd3rdItemToCartElement().click());
