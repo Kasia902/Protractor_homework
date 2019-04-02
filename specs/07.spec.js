@@ -33,16 +33,9 @@ describe('Delete from cart:', () => {
         await CartPage.waitForPageToBeAvailable();
         await MainPage.open();
         await MainPage.openCart(); // open cart
-        await browser.sleep(5000);
-        // await MainPage.waitForDeleteToBeAvailable();
         await MainPage.deleteFromCart(); // delete first item in cart
-        // await MainPage.open();
-        // await MainPage.openCart(); // open cart
-        // await browser.sleep(5000);
-        // await MainPage.waitForLastDeleteToBeAvailable();
+        await MainPage.waitForLastDeleteToBeAvailable();
         await MainPage.deleteLastItemFromCart(); // delete last item from cart
-        // await MainPage.open();
-        // await MainPage.waitForCartToBeAvailable();
         expect(await MainPage.getItemCountElement().getText()).toEqual('1');
     });
 });

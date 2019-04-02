@@ -14,10 +14,11 @@ let dachasadLocator = by.xpath('//*[@class="level-1 dacha_sad"]');
 let baseynyLocator = by.xpath('//*[@data-menu-id="2952"]');
 let nasosyLocator = by.xpath('//a[@href="/dacha_sad/nasosy-vodosnabzheniya/46036/"]');
 let cartLocator = by.xpath('//*[@class="item-cart"]');
-let deleteFromCartLocator = by.xpath('//*[@class="row-indent"]');
+let loadCartLocator = by.xpath('//*[contains(@class,"busy")][@data-dropdown-target="cart"]');
+let deleteFromCartLocator = by.xpath('//*[@class="viewbox-striped border-t"]/ul/li/i');
 let lastDeleteFromCartLocator = by.xpath('//*[@class="row-indent"][last()]/i');
 let ItemsCountLocator = by.xpath('//*[@class="box-in"]/span[contains(text(),"1")]');
-let goToCartButtonLocator = by.xpath('//*[@class="cell-3 text-center"]');
+let goToCartButtonLocator = by.xpath('//*[@class="dropdown-bd active"]');
 
 
 class MainPage extends BasePage {
@@ -32,7 +33,7 @@ class MainPage extends BasePage {
     }
 
     async waitForDeleteToBeAvailable() {
-        await browser.wait(EC.visibilityOf(this.getGoToCartElement().getProtractorElement()), browser.params.explicitWait);
+        await browser.wait(EC.elementToBeClickable(this.getGoToCartElement().getProtractorElement()), browser.params.explicitWait);
     }
 
     async waitForLastDeleteToBeAvailable() {
@@ -88,6 +89,8 @@ class MainPage extends BasePage {
     async openCart() {
         await allure.createStep("OpenCart", async () => {
             await this.getCartElement().click();
+            await browser.wait(EC.presenceOf(this.getLoadCartElement().getProtractorElement()), browser.params.explicitWait);
+            await browser.wait(EC.stalenessOf(this.getLoadCartElement().getProtractorElement()), browser.params.explicitWait);
             await console.log('open cart');
         })();
     }
@@ -166,7 +169,11 @@ class MainPage extends BasePage {
     }
 
     getGoToCartElement() {
-        return new TextContainer(element(goToCartButtonLocator), "Items Count in Cart", this);
+        return new WebButton(element(goToCartButtonLocator), "Items Count in Cart", this);
+    }
+
+    getLoadCartElement() {
+        return new WebButton(element(loadCartLocator), "Items Count in Cart", this);
     }
 }
 
