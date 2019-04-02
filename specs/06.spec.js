@@ -22,10 +22,10 @@ describe('Buy Item:', () => {
         await CatalogPage.waitForPageToBeAvailable();
         await CatalogPage.BuyItemOnHotline();
         await ProductPage.waitForPageToBeAvailable();
-        browser.sleep(5000);
+        // browser.sleep(5000);
         await ProductPage.BuyItemNow();
         await CartPage.waitForPageToBeAvailable();
-        await CartPage.selectShippingMethod('по тарифам перевозчика - До склада Новой почты в Львове (4-9 дней)');
+        await CartPage.selectShippingMethod('по тарифам перевозчика - До склада Новой почты в Львове (1-3 дня)');
         await CartPage.selectDeliveryPointMenuNumber(2);
         await CartPage.makeOrder();
         expect(await CartPage.getPayByCardElement().isDisplayed());

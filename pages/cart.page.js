@@ -29,6 +29,7 @@ class CartPage extends BasePage {
         await allure.createStep("Select Shipping Method", async () => {
             await this.getDeliveryDropdownElement().click();
             await (this.getDeliveryDropdownElement().selectDropdownOption(text));
+            await this.getDeliveryDropdownElement().click();
         })();
     }
 

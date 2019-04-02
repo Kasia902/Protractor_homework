@@ -41,7 +41,7 @@ class CatalogPage extends BasePage {
 
     async openShlyambur() {
         await allure.createStep("Open All for Alpinizm", async () => {
-            await browser.get('https://hotline.ua/tourism/snaryazhenie-dlya-alpinizma/');
+            await browser.get('https://hotline.ua/tourism/snaryazhenie-dlya-alpinizma');
         })();
     }
 
@@ -67,7 +67,7 @@ class CatalogPage extends BasePage {
     }
 
 
-  async Buy2ndItemOnHotline() {
+    async Buy2ndItemOnHotline() {
         await allure.createStep("Add item to Basket", async () => {
             await (this.getBuyOnHotlineCheckboxElement().check());
             await (this.getAdd2ndItemToCartElement().click());
