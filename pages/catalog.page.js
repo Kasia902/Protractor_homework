@@ -12,6 +12,8 @@ let priceFromLocator = by.xpath('//*[@type="number"]');
 let priceToLocator = by.xpath('//*[@data-price-max]');
 let okButtonLocator = by.xpath('//*[@value="OK"]');
 let petzlLocator = by.xpath('//*[@title="Цены на Petzl Rocpec P26"]');
+let add2ndItemToBasketLocator = by.xpath('//*[@id="catalog-products"]/div[2]/ul/li[2]/div[2]');
+let add1stItemToBasketLocator = by.xpath('//*[@id="catalog-products"]/div[2]/ul/li[1]/div[2]');
 
 
 class CatalogPage extends BasePage {
@@ -65,6 +67,21 @@ class CatalogPage extends BasePage {
     }
 
 
+  async Buy2ndItemOnHotline() {
+        await allure.createStep("Add item to Basket", async () => {
+            await (this.getBuyOnHotlineCheckboxElement().check());
+            await (this.getAdd2ndItemToCartElement().click());
+        })();
+    }
+
+    async Buy1stItemOnHotline() {
+        await allure.createStep("Add item to Basket", async () => {
+            await (this.getBuyOnHotlineCheckboxElement().check());
+            await (this.getAdd1stItemToCartElement().click());
+        })();
+    }
+
+
     // PO Getters
     getBuyOnHotlineCheckboxElement() {
         return new Checkbox(element(buyOnHotlineCheckboxLocator), "Checkbox Kupyty na Hotline", this);
@@ -92,6 +109,14 @@ class CatalogPage extends BasePage {
 
     getFirstItemInListElement() {
         return new TextContainer(element(petzlLocator), "Item in List", this);
+    }
+  
+    getAdd2ndItemToCartElement() {
+        return new WebButton(element(add2ndItemToBasketLocator), "Add item to Basket 2nd Button", this);
+    }
+
+    getAdd1stItemToCartElement() {
+        return new WebButton(element(add1stItemToBasketLocator), "Add item to Basket 1st Button", this);
     }
 }
 
