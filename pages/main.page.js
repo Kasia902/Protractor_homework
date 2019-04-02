@@ -9,6 +9,9 @@ let searchFieldLocator = by.xpath('//*[@id="searchbox"]');
 let submitSearchButtonLocator = by.xpath('//*[@id="doSearch"]');
 let cityBannerCloseLocator = by.xpath('//*[@class="close"]');
 let feedbackLocator = by.xpath('//a[@href="/feedback/"]');
+let dachasadLocator = by.xpath('//*[@class="level-1 dacha_sad"]');
+let baseynyLocator = by.xpath('//*[@data-menu-id="2952"]');
+let nasosyLocator = by.xpath('//a[@href="/dacha_sad/nasosy-vodosnabzheniya/46036/"]');
 
 
 class MainPage extends BasePage {
@@ -59,6 +62,14 @@ class MainPage extends BasePage {
         await this.geSearchFieldElement().clear();
     }
 
+    async openNasosyCatalog() {
+        await allure.createStep("OpenNasosyMenu", async () => {
+            await this.getDachaSadMenuElement().hoverElement();
+            await this.getBaseynyMenuElement().click();
+            await this.getNasosyMenuElement().click();
+        })();
+    }
+
 
     // PO Getters
 
@@ -84,6 +95,18 @@ class MainPage extends BasePage {
 
     getFeedbackLinkLocator() {
         return new WebButton(element(feedbackLocator), "Navigate Feedback Form Link", this);
+    }
+
+    getDachaSadMenuElement() {
+        return new WebButton(element(dachasadLocator), "Dacha Sad Menu Item", this);
+    }
+
+    getBaseynyMenuElement() {
+        return new WebButton(element(baseynyLocator), "Baseyny, Stavky, Fontany Sub-menu Item", this);
+    }
+
+    getNasosyMenuElement() {
+        return new WebButton(element(nasosyLocator), "Nasosy Sub-menu Item", this);
     }
 }
 
