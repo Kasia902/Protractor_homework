@@ -9,6 +9,7 @@ let userIconLocator = by.xpath('//*[@class="name ellipsis"]');
 let searchFieldLocator = by.xpath('//*[@id="searchbox"]');
 let submitSearchButtonLocator = by.xpath('//*[@id="doSearch"]');
 let cityBannerCloseLocator = by.xpath('//*[@class="close"]');
+let feedbackLocator = by.xpath('//a[@href="/feedback/"]');
 let dachasadLocator = by.xpath('//*[@class="level-1 dacha_sad"]');
 let baseynyLocator = by.xpath('//*[@data-menu-id="2952"]');
 let nasosyLocator = by.xpath('//a[@href="/dacha_sad/nasosy-vodosnabzheniya/46036/"]');
@@ -37,6 +38,16 @@ class MainPage extends BasePage {
     async open() {
         await allure.createStep("Open main Hotline page", async () => {
             await browser.get('https://hotline.ua/');
+        })();
+    }
+
+
+    async openFeedback() {
+        await allure.createStep("Open Feedback Page", async () => {
+            await this.getFeedbackLinkLocator().click();
+            let handles = (await browser.getAllWindowHandles());
+            await browser.switchTo().window(handles[1]);
+            });
         })();
     }
 
@@ -117,6 +128,10 @@ class MainPage extends BasePage {
 
     getCityBannerCloseButtonElement() {
         return new WebButton(element(cityBannerCloseLocator), "Navigate Login Button", this);
+    }
+
+    getFeedbackLinkLocator() {
+        return new WebButton(element(feedbackLocator), "Navigate Feedback Form Link", this);
     }
 
     getDachaSadMenuElement() {
