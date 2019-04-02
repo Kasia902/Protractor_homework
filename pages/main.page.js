@@ -47,7 +47,6 @@ class MainPage extends BasePage {
             await this.getFeedbackLinkLocator().click();
             let handles = (await browser.getAllWindowHandles());
             await browser.switchTo().window(handles[1]);
-            });
         })();
     }
 
