@@ -10,9 +10,8 @@ describe('Hotline - Filter:', () => {
         await browser.get('https://hotline.ua/tourism/snaryazhenie-dlya-alpinizma/');
         await MainPage.closeCityBanner();
         await CatalogPage.filterShlyambur();
-        await browser.sleep(5000);
         await CatalogPage.setPriceRange('1200', '2000');
-        await browser.sleep(5000);
+        await CatalogPage.waitForItemToBeAvailable();
         expect(await CatalogPage.getFirstItemInListElement().getText()).toContain('Petzl Rocpec P26');
     });
 });
