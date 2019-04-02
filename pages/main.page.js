@@ -31,9 +31,8 @@ class MainPage extends BasePage {
     async openFeedback() {
         await allure.createStep("Open Feedback Page", async () => {
             await this.getFeedbackLinkLocator().click();
-            await browser.getAllWindowHandles().then(function (handles) {
-                browser.sleep(5000);
-                browser.switchTo().window(handles[1]);
+            let handles = (await browser.getAllWindowHandles());
+            await browser.switchTo().window(handles[1]);
             });
         })();
     }
