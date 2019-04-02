@@ -7,7 +7,8 @@ describe('Hotline - Filter:', () => {
         // empty
     });
     it(`Filter items`, async () => {
-        await browser.get('https://hotline.ua/tourism/snaryazhenie-dlya-alpinizma/');
+        await CatalogPage.openShlyambur();
+        await CatalogPage.waitForShlyamburToBeAvailable();
         await MainPage.closeCityBanner();
         await CatalogPage.filterShlyambur();
         await CatalogPage.setPriceRange('1200', '2000');

@@ -26,10 +26,20 @@ class CatalogPage extends BasePage {
         await browser.wait(EC.visibilityOf(this.getFirstItemInListElement().getProtractorElement()), browser.params.explicitWait);
     }
 
+    async waitForShlyamburToBeAvailable() {
+        await browser.wait(EC.visibilityOf(this.getShlyamburElement().getProtractorElement()), browser.params.explicitWait);
+    }
+
     async BuyItemOnHotline() {
         await allure.createStep("Add item to Basket", async () => {
             await (this.getBuyOnHotlineCheckboxElement().check());
             await (this.getAdd3rdItemToCartElement().click());
+        })();
+    }
+
+    async openShlyambur() {
+        await allure.createStep("Open All for Alpinizm", async () => {
+            await browser.get('https://hotline.ua/tourism/snaryazhenie-dlya-alpinizma/');
         })();
     }
 
