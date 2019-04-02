@@ -12,7 +12,7 @@ describe('Send a message:', () => {
         await MainPage.openFeedback();
         await FeedbackPage.waitForPageToBeAvailable();
         await FeedbackPage.attachImage();
-        await browser.sleep(5000);
-        // expect(await SearchPage.getFirstItemInListElement().getText()).toContain('Samsung Galaxy');
+        await FeedbackPage.attachFile();
+        expect(await FeedbackPage.getErrorContainerElement().getText()).toEqual(`Расширение загружаемого файла нет в списке разрешенных`);
     });
 });

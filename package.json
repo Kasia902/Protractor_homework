@@ -22,6 +22,7 @@
         "jasmine-allure-reporter": "^1.0.2",
         "path": "^0.12.7",
         "protractor": "^5.4.1",
-        "randomstring": "^1.1.5"
+        "randomstring": "^1.1.5",
+        "remote": "^0.2.6"
     }
 }
