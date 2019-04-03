@@ -13,11 +13,12 @@ let feedbackLocator = by.xpath('//a[@href="/feedback/"]');
 let dachasadLocator = by.xpath('//*[@class="level-1 dacha_sad"]');
 let baseynyLocator = by.xpath('//*[@data-menu-id="2952"]');
 let nasosyLocator = by.xpath('//a[@href="/dacha_sad/nasosy-vodosnabzheniya/46036/"]');
-let cartLocator = by.xpath('//*[@class="box-in"]');
+let cartLocator = by.xpath('//*[@class="item-cart"]');
+let loadCartLocator = by.xpath('//*[contains(@class,"busy")][@data-dropdown-target="cart"]');
 let deleteFromCartLocator = by.xpath('//*[@class="viewbox-striped border-t"]/ul/li/i');
 let lastDeleteFromCartLocator = by.xpath('//*[@class="row-indent"][last()]/i');
 let ItemsCountLocator = by.xpath('//*[@class="box-in"]/span[contains(text(),"1")]');
-let goToCartButtonLocator = by.xpath('//*[@class="li-scroll clearfix"]');
+let goToCartButtonLocator = by.xpath('//*[@class="dropdown-bd active"]');
 
 
 class MainPage extends BasePage {
@@ -28,11 +29,15 @@ class MainPage extends BasePage {
     }
 
     async waitForCartToBeAvailable() {
-        await browser.wait(EC.visibilityOf(this.getCartElement().getProtractorElement()), 5000);
+        await browser.wait(EC.visibilityOf(this.getItemCountElement().getProtractorElement()), browser.params.explicitWait);
     }
 
     async waitForDeleteToBeAvailable() {
-        await browser.wait(EC.visibilityOf(this.getDeleteFromCartIconElement().getProtractorElement()), 5000);
+        await browser.wait(EC.elementToBeClickable(this.getGoToCartElement().getProtractorElement()), browser.params.explicitWait);
+    }
+
+    async waitForLastDeleteToBeAvailable() {
+        await browser.wait(EC.elementToBeClickable(this.getLastDeleteFromCartIconElement().getProtractorElement()), browser.params.explicitWait);
     }
 
     async open() {
@@ -84,7 +89,9 @@ class MainPage extends BasePage {
     async openCart() {
         await allure.createStep("OpenCart", async () => {
             await this.getCartElement().click();
-            console.log('open cart');
+            await browser.wait(EC.presenceOf(this.getLoadCartElement().getProtractorElement()), browser.params.explicitWait);
+            await browser.wait(EC.stalenessOf(this.getLoadCartElement().getProtractorElement()), browser.params.explicitWait);
+            await console.log('open cart');
         })();
     }
 
@@ -162,7 +169,11 @@ class MainPage extends BasePage {
     }
 
     getGoToCartElement() {
-        return new TextContainer(element(goToCartButtonLocator), "Items Count in Cart", this);
+        return new WebButton(element(goToCartButtonLocator), "Items Count in Cart", this);
+    }
+
+    getLoadCartElement() {
+        return new WebButton(element(loadCartLocator), "Items Count in Cart", this);
     }
 }
 

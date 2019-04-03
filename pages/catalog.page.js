@@ -6,14 +6,14 @@ let TextContainer = require("../elements/textContainer.element");
 
 let EC = protractor.ExpectedConditions;
 let buyOnHotlineCheckboxLocator = by.xpath('//*[@class="sorting-in"]/li[3]/label');
-let addThirdItemToBasketLocator = by.xpath('//*[@id="catalog-products"]/div[2]/ul/li[3]/div[2]');
+let addThirdItemToBasketLocator = by.xpath('(//*[@class="icon icon-cart"])[4]');
 let shlyamburLocator = by.xpath('//*[@href="/tourism/snaryazhenie-dlya-alpinizma/66171/"]');
 let priceFromLocator = by.xpath('//*[@type="number"]');
 let priceToLocator = by.xpath('//*[@data-price-max]');
 let okButtonLocator = by.xpath('//*[@value="OK"]');
 let petzlLocator = by.xpath('//*[@title="Цены на Petzl Rocpec P26"]');
-let add2ndItemToBasketLocator = by.xpath('//*[@id="catalog-products"]/div[2]/ul/li[2]/div[2]');
-let add1stItemToBasketLocator = by.xpath('//*[@id="catalog-products"]/div[2]/ul/li[1]/div[2]');
+let add2ndItemToBasketLocator = by.xpath('(//*[@class="icon icon-cart"])[3]');
+let add1stItemToBasketLocator = by.xpath('(//*[@class="icon icon-cart"])[2]');
 
 
 class CatalogPage extends BasePage {
@@ -21,7 +21,7 @@ class CatalogPage extends BasePage {
 
     async waitForPageToBeAvailable() {
         await browser.wait(EC.visibilityOf(this.getBuyOnHotlineCheckboxElement().getProtractorElement()), browser.params.explicitWait);
-        await browser.wait(EC.visibilityOf(this.getAdd3rdItemToCartElement().getProtractorElement()), browser.params.explicitWait);
+        // await browser.wait(EC.visibilityOf(this.getAdd3rdItemToCartElement().getProtractorElement()), browser.params.explicitWait);
     }
 
     async waitForItemToBeAvailable() {
@@ -32,7 +32,7 @@ class CatalogPage extends BasePage {
         await browser.wait(EC.visibilityOf(this.getShlyamburElement().getProtractorElement()), browser.params.explicitWait);
     }
 
-    async BuyItemOnHotline() {
+    async buy3rdItemOnHotline() {
         await allure.createStep("Add item to Basket", async () => {
             await (this.getBuyOnHotlineCheckboxElement().check());
             await (this.getAdd3rdItemToCartElement().click());
@@ -41,7 +41,7 @@ class CatalogPage extends BasePage {
 
     async openShlyambur() {
         await allure.createStep("Open All for Alpinizm", async () => {
-            await browser.get('https://hotline.ua/tourism/snaryazhenie-dlya-alpinizma/');
+            await browser.get('https://hotline.ua/tourism/snaryazhenie-dlya-alpinizma');
         })();
     }
 
@@ -67,7 +67,7 @@ class CatalogPage extends BasePage {
     }
 
 
-  async Buy2ndItemOnHotline() {
+    async Buy2ndItemOnHotline() {
         await allure.createStep("Add item to Basket", async () => {
             await (this.getBuyOnHotlineCheckboxElement().check());
             await (this.getAdd2ndItemToCartElement().click());
